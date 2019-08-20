@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Move</title>
+</head>
+<body>
+<div id="moving"></div>
+<script>
+    function target2b(image, left, top, size) {
+        this.image = image;
+        this.left = left;
+        this.top = top;
+        this.size = size; //basic
+        //khai bao trien khai anh
+        this.get2Btarget = function () {
+            // dat thuoc tinh anh vao gom  width, height,src, style: top left + px; position absolute
+            return "<img width='" + this.size + "' height='" + this.size + "' src='" + this.image + "' style='top: " + this.top + "px; left: " + this.left + "px;  position: absolute'/>"
+
+        };
+       this.moveRight = function () {
+           this.left += 60;
+       };
+       this.moveDown = function () {
+           this.top += 90;
+       }
+       this.moveLeft = function () {
+           this.left -= 60;
+       }
+       this.moveUp = function () {
+           this.top -= 90;
+       }
+    };
+    //di chuyen
+ //khoi tao 2b
+    let twoBee = new target2b("19389759_2294738977418802_1832772107_n.ico",0,0,200);
+    function moveOut() {
+
+        if (twoBee.left< window.innerWidth - twoBee.size && twoBee.top ==0){
+            twoBee.moveRight();
+        } else if (twoBee.left>= window.innerWidth - twoBee.size&& (twoBee.top< window.innerHeight - twoBee.size)){
+            twoBee.moveDown();
+        } else if (twoBee.top>= window.innerHeight - twoBee.size && twoBee.left>0){
+            twoBee.moveLeft();
+        } else if (twoBee.left ==0 && twoBee.top> 0){
+            twoBee.moveUp();
+        };
+        document.getElementById("moving").innerHTML = twoBee.get2Btarget();
+        setTimeout(moveOut,200)
+    }
+    moveOut();
+</script>
+</body>
+</html>
